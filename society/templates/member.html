@@ -28,8 +28,28 @@
  </table>
  {% endif %}
  
- </div>
+ <div class="pull-left">
+      <ul class="pagination">
+            {% if member_list.has_previous %}
+                <li><a href="?page={{ member_list.previous_page_number }}">prev</a></li>
+            {% endif %}
+            <script type="text/javascript">
+            for (var i=1;i<={{ member_list.paginator.num_pages }};i++)
+            {
+             if (i == {{ member_list.number }}) {
+                document.write("<li class='active'> <a href='?page=" + i + "'>" + i + "</a></li>");
+             } else {
+              document.write("<li> <a href='?page=" + i + "'>" + i + "</a></li>");
+             }
+            }
+            </script>
+            {% if member_list.has_next %}
+               <li> <a href="?page={{ member_list.next_page_number }}">next</a></li>
+            {% endif %}
+      </ul>
+  </div>
+</div>
  <hr>
- <a href="{% url 'add_one_member' %}" class="btn btn-primary">添加会员</a>   
+ <a href="{% url 'add_one_member' %}" class="btn btn-info">添加会员</a>   
  
 {% endblock %}
